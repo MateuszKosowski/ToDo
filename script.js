@@ -35,6 +35,7 @@ const addNewTask = () => {
         ulList.append(newToDo)
         toDoInput.value = ''
         errorInfo.textContent = ''
+        createToolsArea()
 
     } else {
         errorInfo.textContent = 'Wpisz treść zadania!'
