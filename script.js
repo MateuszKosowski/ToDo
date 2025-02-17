@@ -25,20 +25,25 @@ const prepareDOMElements = () => {
     popupInput = document.querySelector('.popup-input')
     popupAddBtn = document.querySelector('.accept')
     popupCloseBtn = document.querySelector('.cancel')
+}
 
+const isDuplicateTask = (task) => {
+    return [...ulList.querySelectorAll('li')].some(li => li.firstChild.textContent.trim() === task)
 }
 
 const addNewTask = () => {
-    if (toDoInput.value != '') {
+    const taskText = toDoInput.value.trim()
+    if (taskText === '') {
+        errorInfo.textContent = 'Wpisz treść zadania!'
+    } else if (isDuplicateTask(taskText)) {
+        errorInfo.textContent = 'To zadanie już istnieje!'
+    } else {
         newToDo = document.createElement('li')
-        newToDo.textContent = toDoInput.value
+        newToDo.textContent = taskText
         ulList.append(newToDo)
         toDoInput.value = ''
         errorInfo.textContent = ''
         createToolsArea()
-
-    } else {
-        errorInfo.textContent = 'Wpisz treść zadania!'
     }
 }
 
